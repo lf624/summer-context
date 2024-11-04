@@ -26,6 +26,8 @@ public class AnnotationConfigApplicationContext implements ConfigurableApplicati
     private List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     public AnnotationConfigApplicationContext(Class<?> configClass, PropertyResolver resolver) {
+        ApplicationContextUtils.setApplicationContext(this);
+
         this.propertyResolver = resolver;
         // 扫描包中 .class 文件，并获得完整类名
         Set<String> beanClassNames = scanForClassNames(configClass);
