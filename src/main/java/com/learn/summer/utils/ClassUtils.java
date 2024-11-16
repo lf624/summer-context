@@ -3,6 +3,7 @@ package com.learn.summer.utils;
 import com.learn.summer.annotation.Bean;
 import com.learn.summer.annotation.Component;
 import com.learn.summer.exception.BeanDefinitionException;
+import jakarta.annotation.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -25,6 +26,16 @@ public class ClassUtils {
             }
         }
         return a;
+    }
+
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public static <A extends Annotation> A getAnnotation(Annotation[] annos, Class<?> annoClass) {
+        for(Annotation anno : annos) {
+            if(annoClass.isInstance(anno))
+                return (A) anno;
+        }
+        return null;
     }
 
     // @Component 标注的 Bean 类
